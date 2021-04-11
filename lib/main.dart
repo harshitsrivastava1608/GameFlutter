@@ -196,6 +196,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
 
               Text(result),
+              Visibility(
+                visible: false,
+                child: AlertDialog(
+
+                  title: Text("The winner is :"+result),
+                  actions: [
+                    ElevatedButton(onPressed: null, child: Text("Play Again"))
+                  ],
+                ),
+              )
               //Text(p1+p2)
             ],
           ),

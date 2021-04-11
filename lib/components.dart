@@ -37,51 +37,55 @@ initial1(){
         builder: (context) {
           return Scaffold(
 
-            body: AlertDialog(
+            body: SizedBox(
+              height: 500,
+              width: 500,
+              child: AlertDialog(
 
-              title: Text('On Your Marks!'),
-              content: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(player1+"*"+player2),
-                  TextField(
-                    controller: _textFieldController1,
-                    decoration: InputDecoration(hintText: "Name Player1",),
-                    onChanged: (value) => player1 = value,onSubmitted: (value) => player1 = value,
-                    onEditingComplete: (){
+                title: Text('On Your Marks!'),
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(player1+"*"+player2),
+                    TextField(
+                      controller: _textFieldController1,
+                      decoration: InputDecoration(hintText: "Name Player1",),
+                      onChanged: (value) => player1 = value,onSubmitted: (value) => player1 = value,
+                      onEditingComplete: (){
+                        setState(() {
+                          initial1();
+                          player1=_textFieldController1.text.toString();
+                        });
+                      },
+                    ),
+                    TextField(
+                      controller: _textFieldController2,
+                      decoration: InputDecoration(hintText: "Name Player2"),
+                      onChanged: (value) => player2 = value,onSubmitted: (value) => player2 = value,
+                      onEditingComplete: (){
+                        setState(() {
+                          initial2();
+                          player2=_textFieldController2.text.toString();
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+
+                  new ElevatedButton(
+
+                    child: new Text('Start Game'),
+                    style: ButtonStyle(fixedSize: MaterialStateProperty.all(Size(300, 50))),
+                    onPressed: () {
                       setState(() {
-                        initial1();
-                        player1=_textFieldController1.text.toString();
+                        initial1();initial2();
+                        Navigator.push(context,MaterialPageRoute(builder: (context)=>MyGame(player1,player2)));
                       });
                     },
-                  ),
-                  TextField(
-                    controller: _textFieldController2,
-                    decoration: InputDecoration(hintText: "Name Player2"),
-                    onChanged: (value) => player2 = value,onSubmitted: (value) => player2 = value,
-                    onEditingComplete: (){
-                      setState(() {
-                        initial2();
-                        player2=_textFieldController2.text.toString();
-                      });
-                    },
-                  ),
+                  )
                 ],
               ),
-              actions: <Widget>[
-
-                new ElevatedButton(
-
-                  child: new Text('Start Game'),
-                  style: ButtonStyle(fixedSize: MaterialStateProperty.all(Size(300, 50))),
-                  onPressed: () {
-                    setState(() {
-                      initial1();initial2();
-                      Navigator.push(context,MaterialPageRoute(builder: (context)=>MyGame(player1,player2)));
-                    });
-                  },
-                )
-              ],
             ),
           );
         });
