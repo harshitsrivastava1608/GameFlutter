@@ -25,7 +25,7 @@ class MyGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title:p+q,
+      title:p+q,debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -50,71 +50,79 @@ class _MyHomePageState extends State<MyHomePage> {
     player1=p1;
     player2=p2;
   }
-  int _turn=0;String text="";List _list=[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];String result="Winner";
+  int _turn=0;String text="";List<String> _list=["","","","","","","","","",""];String result="Winner";
+  showResult(){
+    if(result.compareTo("Winner")==0){
+      return false;
+    }
+    else
+      return true;
+  }
   isPressed(int n){
     ++_turn;
     if(_turn%2==0) {
       text = "X";
-      _list[n]=1;
+      _list[n]="X";
     }
     else {
       text = "O";
-      _list[n]=0;
+      _list[n]="O";
     }
     if(_turn>4)
-      result=result+" "+checkWinner();
+      result=checkWinner();
   }
   checkWinner(){
-    if((_list[1]==_list[2])&&(_list[2]==_list[3])) {
-      if(_list[1]==0)
+
+    if((_list[1]==_list[2])&&(_list[2]==_list[3])&&(_list[1].isNotEmpty)) {
+      if(_list[1]=='O')
         return player1;
-      if(_list[1]==1)
+      if(_list[1]=='X')
         return player2;
     }
-    if((_list[1]==_list[4])&&(_list[4]==_list[7])) {
-      if(_list[1]==0)
+    if((_list[1]==_list[4])&&(_list[4]==_list[7])&&(_list[1].isNotEmpty)) {
+      if(_list[1]=='O')
         return player1;
-      if(_list[1]==1)
+      if(_list[1]=='X')
         return player2;
     }
-    if((_list[2]==_list[5])&&(_list[5]==_list[8])) {
-      if(_list[2]==0)
+    if((_list[2]==_list[5])&&(_list[5]==_list[8])&&(_list[2].isNotEmpty)) {
+      if(_list[2]=='O')
         return player1;
-      if(_list[2]==1)
+      if(_list[2]=='X')
         return player2;
     }
-    if((_list[4]==_list[5])&&(_list[5]==_list[6])) {
-      if(_list[4]==0)
+    if((_list[4]==_list[5])&&(_list[5]==_list[6])&&(_list[4].isNotEmpty)) {
+      if(_list[4]=='O')
         return player1;
-      if(_list[4]==1)
+      if(_list[4]=="X")
         return player2;
     }
-    if((_list[7]==_list[8])&&(_list[8]==_list[9])) {
-      if(_list[7]==0)
+    if((_list[7]==_list[8])&&(_list[8]==_list[9])&&(_list[7].isNotEmpty)) {
+      if(_list[7]=='O')
         return player1;
-      if(_list[7]==1)
+      if(_list[7]=='X')
         return player2;
     }
-    if((_list[3]==_list[6])&&(_list[6]==_list[9])) {
-      if(_list[3]==0)
+    if((_list[3]==_list[6])&&(_list[6]==_list[9])&&(_list[3].isNotEmpty)) {
+      if(_list[3]=='O')
         return player1;
-      if(_list[3]==1)
+      if(_list[3]=="X")
         return player2;
     }
-    if((_list[3]==_list[5])&&(_list[5]==_list[7])) {
-      if(_list[3]==0)
+    if((_list[3]==_list[5])&&(_list[5]==_list[7])&&(_list[1].isNotEmpty)) {
+      if(_list[3]=='O')
         return player1;
-      if(_list[3]==1)
+      if(_list[3]=='X')
         return player2;
     }
-    if((_list[1]==_list[5])&&(_list[5]==_list[9])) {
-      if(_list[1]==0)
+    if((_list[1]==_list[5])&&(_list[5]==_list[9])&&(_list[1].isNotEmpty)) {
+      if(_list[1]=='O')
         return player1;
-      if(_list[1]==1)
+      if(_list[1]=='X')
         return player2;
     }
     else
-      return "";
+      return "Winner";
   }
   @override
   Widget build(BuildContext context) {
@@ -197,12 +205,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
               Text(result),
               Visibility(
-                visible: false,
+                visible: showResult(),
                 child: AlertDialog(
 
                   title: Text("The winner is :"+result),
                   actions: [
-                    ElevatedButton(onPressed: null, child: Text("Play Again"))
+                    ElevatedButton(onPressed: (){
+                      Navigator.push(context,MaterialPageRoute(builder: (context)=>AlertMessage()));
+                    }, child: Text("Play Again"))
                   ],
                 ),
               )
