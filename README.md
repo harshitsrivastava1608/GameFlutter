@@ -1,2 +1,2 @@
-#TIC-TAC-TOE
-##Flutter Hybrid Game App
+TIC-TAC-TOE
+Flutter Hybrid Game App
