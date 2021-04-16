@@ -158,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
 
             Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
             child: Container(
               alignment: Alignment.center,
               padding: EdgeInsets.fromLTRB(28, 0, 0, 0),
@@ -324,25 +324,30 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-                  Column(
-                    children: <Widget>[
-                      Visibility(
-                        child: Text(
-                          player1 + " \'s Turn",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.pink,fontSize: 26),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+
+                      children: <Widget>[
+                        Visibility(
+
+                          child: Text(
+                            player1 + " \'s Turn",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, color: Colors.pink,fontSize: 26),
+                          ),
+                          visible: turn1,
                         ),
-                        visible: turn1,
-                      ),
-                      Visibility(
-                        child: Text(
-                          player2 + " \'s Turn",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.pink,fontSize: 26),
+                        Visibility(
+                          child: Text(
+                            player2 + " \'s Turn",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, color: Colors.pink,fontSize: 26),
+                          ),
+                          visible: turn2,
                         ),
-                        visible: turn2,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
           // Text(result),
           Visibility(
